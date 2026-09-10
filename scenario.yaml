@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: pallet-classifier-train
+  annotations:
+    scenarios.ai.sap.com/name: "pallet-classification"
+    scenarios.ai.sap.com/description: "Good/bad pallet image classifier"
+    executables.ai.sap.com/name: "pallet-train-exec"
+    executables.ai.sap.com/description: "Training executable for pallet classifier"
+  labels:
+    scenarios.ai.sap.com/id: "pallet-classification"
+    ai.sap.com/version: "1.0.0"
+spec:
+  imagePullSecrets:
+    - name: pallet-secret-2
+  entrypoint: mytrain
+  templates:
+    - name: mytrain
+      inputs:
+        artifacts:
+          - name: traindata
+            path: /app/data/train/
+          - name: valdata
+            path: /app/data/val/
+      outputs:
+        artifacts:
+          - name: trainedmodel
+            path: /app/model/
+            globalName: trainedmodel
+      container:
+        image: <your-registry>/pallet-train:latest
+        command: ["python", "train.py"]
