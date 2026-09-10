@@ -5,8 +5,6 @@ metadata:
   annotations:
     scenarios.ai.sap.com/name: "pallet-classification"
     scenarios.ai.sap.com/description: "Good/bad pallet image classifier"
-    executables.ai.sap.com/name: "pallet-train-exec"
-    executables.ai.sap.com/description: "Training executable for pallet classifier"
   labels:
     scenarios.ai.sap.com/id: "pallet-classification"
     ai.sap.com/version: "1.0.0"
