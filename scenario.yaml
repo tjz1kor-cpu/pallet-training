@@ -10,23 +10,3 @@ metadata:
   labels:
     scenarios.ai.sap.com/id: "pallet-classification"
     ai.sap.com/version: "1.0.0"
-spec:
-  imagePullSecrets:
-    - name: pallet-secret-2
-  entrypoint: mytrain
-  templates:
-    - name: mytrain
-      inputs:
-        artifacts:
-          - name: traindata
-            path: /app/data/train/
-          - name: valdata
-            path: /app/data/val/
-      outputs:
-        artifacts:
-          - name: trainedmodel
-            path: /app/model/
-            globalName: trainedmodel
-      container:
-        image: <your-registry>/pallet-train:latest
-        command: ["python", "train.py"]
